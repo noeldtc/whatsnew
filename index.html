@@ -8,168 +8,115 @@
   <meta name="theme-color" content="#0f1222">
   <style>
     :root {
-      --bg: #f5f6fb;
-      --surface: #ffffff;
-      --text: #1c2033;
-      --muted: #5b6178;
-      --border: #e3e6f0;
-      --accent: #6c4cf5;
-      --accent-2: #e8478b;
-      --accent-soft: #eeeaff;
-      --radius: 16px;
-      --shadow: 0 6px 24px rgba(28, 32, 51, .07);
+      --bg: #fbfaf7;
+      --text: #181816;
+      --muted: #5f5e57;
+      --line: #d9d6cc;
+      --accent: #b3261e;
+      --tint: #f1eee6;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0f1222;
-        --surface: #181c33;
-        --text: #eceefb;
-        --muted: #a2a8c6;
-        --border: #272c4b;
-        --accent: #9b85ff;
-        --accent-2: #ff6fa8;
-        --accent-soft: #232850;
-        --shadow: 0 6px 24px rgba(0, 0, 0, .35);
+        --bg: #121211;
+        --text: #ecebe4;
+        --muted: #a3a197;
+        --line: #33322d;
+        --accent: #ef6a5e;
+        --tint: #1b1b19;
       }
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font: 17px/1.6 system-ui, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 22px; }
+    h1, h2, h3, .brand { font-family: Georgia, "Iowan Old Style", "Times New Roman", serif; font-weight: 700; }
 
-    /* Navegación */
-    nav {
-      position: sticky; top: 0; z-index: 10;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
-    .brand { font-weight: 800; font-size: 1.15rem; color: var(--text); letter-spacing: -.02em; }
-    .brand span { color: var(--accent); }
-    nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
-    nav ul a { color: var(--muted); font-weight: 500; }
-    nav ul a:hover { color: var(--text); text-decoration: none; }
+    header.top { border-bottom: 1px solid var(--line); }
+    header.top .wrap { display: flex; justify-content: space-between; align-items: baseline; padding-top: 18px; padding-bottom: 14px; gap: 16px; flex-wrap: wrap; }
+    .brand { font-size: 1.25rem; color: var(--text); text-decoration: none; }
+    header.top nav { display: flex; gap: 18px; font-size: .9rem; }
+    header.top nav a { color: var(--muted); text-decoration: none; }
+    header.top nav a:hover { color: var(--accent); }
 
-    /* Hero */
-    .hero { text-align: center; padding: 72px 0 56px; }
-    .badge {
-      display: inline-block; padding: 5px 14px; border-radius: 999px;
-      background: var(--accent-soft); color: var(--accent);
-      font-size: .8rem; font-weight: 600; margin-bottom: 18px;
-    }
-    .hero h1 {
-      font-size: clamp(2.3rem, 6vw, 3.8rem); line-height: 1.1; margin: 0 0 16px; letter-spacing: -.03em;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .hero p { max-width: 620px; margin: 0 auto 28px; color: var(--muted); font-size: 1.12rem; }
-    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: .95rem;
-    }
-    .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
-    .btn.ghost { border: 1px solid var(--border); color: var(--text); background: var(--surface); }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .intro { padding-top: 56px; padding-bottom: 40px; }
+    .intro h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; margin: 0 0 14px; }
+    .intro p { margin: 0 0 12px; max-width: 560px; color: var(--muted); }
+    .meta { font-size: .85rem; }
 
-    /* Secciones */
-    section { padding: 40px 0; }
-    h2 { font-size: 1.7rem; letter-spacing: -.02em; margin: 0 0 8px; }
-    .lead { color: var(--muted); margin: 0 0 28px; max-width: 680px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 22px; box-shadow: var(--shadow);
-    }
-    .card .ico { font-size: 1.6rem; margin-bottom: 8px; }
-    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
-    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+    section { padding: 32px 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 1.55rem; margin: 0 0 14px; }
 
-    /* Privacidad */
-    .policy {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 8px 32px 24px; box-shadow: var(--shadow);
-    }
-    .policy h3 { margin: 28px 0 8px; font-size: 1.2rem; }
+    dl.features { margin: 0; }
+    dl.features div { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    dl.features div:last-child { border-bottom: 0; }
+    dt { font-weight: 600; }
+    dd { margin: 0; color: var(--muted); }
+
+    .policy h3 { font-size: 1.15rem; margin: 30px 0 6px; }
     .policy p, .policy li { color: var(--muted); }
-    .policy p { margin: 8px 0; }
-    .policy ul { padding-left: 20px; margin: 8px 0; }
-    .policy li { margin: 4px 0; }
+    .policy p { margin: 6px 0; }
+    .policy ul { padding-left: 20px; margin: 6px 0; }
+    .policy li { margin: 3px 0; }
     .policy strong { color: var(--text); }
-    .updated { color: var(--muted); font-size: .85rem; margin-top: 18px; }
-    .callout {
-      background: var(--accent-soft); border-radius: 12px; padding: 14px 18px; margin: 14px 0; color: var(--text);
-    }
-    .callout p, .callout li { color: var(--text); }
-    .table-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid var(--border); border-radius: 12px; }
+    .note { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 14px 0; }
+    .note p { color: var(--text); }
+    .table-wrap { overflow-x: auto; margin: 10px 0; }
     table { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 560px; }
-    th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    th { background: var(--accent-soft); font-weight: 600; }
+    th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-weight: 600; border-bottom-color: var(--text); }
     td { color: var(--muted); }
-    tr:last-child td { border-bottom: 0; }
+    td strong { color: var(--text); }
+    code { background: var(--tint); padding: 1px 5px; font-size: .88em; }
+    .updated { font-size: .85rem; margin-top: 22px !important; }
 
-    footer { text-align: center; color: var(--muted); font-size: .88rem; padding: 40px 0 56px; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 48px; font-size: .85rem; color: var(--muted); }
     @media (max-width: 640px) {
-      nav ul { display: none; }
-      .policy { padding: 4px 20px 20px; }
-      .hero { padding: 48px 0 36px; }
+      dl.features div { grid-template-columns: 1fr; gap: 0; }
+      .intro { padding-top: 36px; padding-bottom: 28px; }
     }
   </style>
 </head>
 <body>
-  <nav>
+  <header class="top">
     <div class="wrap">
-      <a class="brand" href="#top">Whats<span>New</span></a>
-      <ul>
-        <li><a href="#funciones">Funciones</a></li>
-        <li><a href="#privacidad">Privacidad</a></li>
-        <li><a href="#derechos">Tus derechos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <header class="hero wrap" id="top">
-    <span class="badge">App para Android y Android TV</span>
-    <h1>Nunca te pierdas <em>qué ver</em> a continuación</h1>
-    <p>WhatsNew sigue tus series y películas, te avisa de los estrenos, te recomienda títulos y te deja compartir lista con tu pareja o familia.</p>
-    <div class="btns">
-      <a class="btn primary" href="#funciones">Ver funciones</a>
-      <a class="btn ghost" href="#privacidad">Política de privacidad</a>
+      <a class="brand" href="#top">WhatsNew</a>
+      <nav>
+        <a href="#funciones">Funciones</a>
+        <a href="#privacidad">Privacidad</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
     </div>
   </header>
 
+  <div class="wrap intro" id="top">
+    <h1>WhatsNew, seguimiento de series y películas</h1>
+    <p>App para Android y Android TV. Apunta lo que ves, recibe un aviso cuando sale el siguiente episodio y comparte la lista con otra persona.</p>
+    <p class="meta">Esta página recoge la política de privacidad de la app.</p>
+  </div>
+
   <main class="wrap">
     <section id="funciones">
-      <h2>Qué puedes hacer</h2>
-      <p class="lead">Todo tu seguimiento de series y películas en un solo sitio, sincronizado entre tus dispositivos.</p>
-      <div class="grid">
-        <div class="card"><div class="ico">📺</div><h3>Seguimiento y siguiente episodio</h3><p>Marca lo que has visto, retoma donde lo dejaste y consulta los próximos episodios desde un widget en tu pantalla de inicio.</p></div>
-        <div class="card"><div class="ico">🔔</div><h3>Avisos de estrenos</h3><p>Recordatorios de episodios nuevos y calendario de estrenos de las series que sigues.</p></div>
-        <div class="card"><div class="ico">✨</div><h3>Recomendaciones</h3><p>Sugerencias personalizadas según tus gustos y las plataformas de streaming a las que estás suscrito.</p></div>
-        <div class="card"><div class="ico">👥</div><h3>Perfiles y modo Duo</h3><p>Varios perfiles por cuenta, con PIN opcional, y listas compartidas con tu pareja o familia.</p></div>
-        <div class="card"><div class="ico">📊</div><h3>Estadísticas y resumen del año</h3><p>Horas vistas, géneros favoritos, valoraciones y una tarjeta de tu año para compartir.</p></div>
-        <div class="card"><div class="ico">🔗</div><h3>Stremio y Trakt</h3><p>Importa tu historial desde Trakt o Stremio, abre títulos en Stremio y usa el addon privado de WhatsNew.</p></div>
-        <div class="card"><div class="ico">📡</div><h3>Dónde verlo</h3><p>Disponibilidad por plataforma y país, con acceso directo a tus apps de streaming.</p></div>
-        <div class="card"><div class="ico">📱</div><h3>Móvil y TV</h3><p>Interfaz adaptada a Android TV con mando, modo imagen en imagen y acceso rápido desde el inicio.</p></div>
-      </div>
+      <h2>Qué hace la app</h2>
+      <dl class="features">
+        <div><dt>Seguimiento</dt><dd>Marca lo visto, retoma donde lo dejaste y consulta los próximos episodios en un widget de la pantalla de inicio.</dd></div>
+        <div><dt>Avisos y calendario</dt><dd>Notificaciones de estrenos de las series que sigues, configurables en Ajustes.</dd></div>
+        <div><dt>Recomendaciones</dt><dd>Sugerencias según tus valoraciones y las plataformas de streaming que tienes contratadas.</dd></div>
+        <div><dt>Perfiles y Duo</dt><dd>Varios perfiles por cuenta, con PIN opcional, y listas compartidas con tu pareja o familia.</dd></div>
+        <div><dt>Estadísticas</dt><dd>Horas vistas, géneros y valoraciones, más una tarjeta resumen del año.</dd></div>
+        <div><dt>Trakt y Stremio</dt><dd>Importación de historial desde Trakt (archivo .zip) y Stremio (solo lectura), enlace para abrir títulos en Stremio y addon opcional.</dd></div>
+        <div><dt>Dónde verlo</dt><dd>Disponibilidad por plataforma y país, con acceso a tus apps de streaming.</dd></div>
+        <div><dt>Android TV</dt><dd>Interfaz para mando a distancia, modo imagen en imagen y fila de «Continuar viendo».</dd></div>
+      </dl>
     </section>
 
     <section id="privacidad">
       <h2>Política de privacidad</h2>
-      <p class="lead">Explicamos de forma clara qué datos usa WhatsNew, para qué y cómo puedes controlarlos.</p>
 
       <div class="policy">
         <h3>1. Quién es el responsable</h3>
@@ -198,7 +145,7 @@
           <li>Enviarte notificaciones sobre estrenos de las series que sigues, que puedes configurar o desactivar en Ajustes.</li>
           <li>Detectar y corregir errores, y mejorar el rendimiento y la seguridad.</li>
         </ul>
-        <div class="callout"><p><strong>No vendemos tus datos</strong> ni los usamos para publicidad. La app no muestra anuncios ni utiliza el identificador publicitario.</p></div>
+        <div class="note"><p><strong>No vendemos tus datos</strong> ni los usamos para publicidad. La app no muestra anuncios ni utiliza el identificador publicitario.</p></div>
 
         <h3>4. Analítica y diagnóstico: tú decides</h3>
         <p>La primera vez que abres la app te preguntamos si aceptas la analítica. Por defecto está <strong>desactivada</strong> hasta que aceptes, y puedes cambiarla en cualquier momento en <em>Ajustes → Enviar análisis de uso</em>.</p>
@@ -245,16 +192,13 @@
 
     <section id="contacto">
       <h2>Contacto</h2>
-      <p class="lead">¿Dudas sobre privacidad, sugerencias o quieres borrar tu cuenta?</p>
-      <div class="btns" style="justify-content:flex-start">
-        <a class="btn primary" href="mailto:d.noel.d.t.c@gmail.com?subject=WhatsNew">Escríbenos</a>
-      </div>
+      <p>Para dudas de privacidad, sugerencias o borrado de cuenta: <a href="mailto:d.noel.d.t.c@gmail.com?subject=WhatsNew">d.noel.d.t.c@gmail.com</a>.</p>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      © 2026 WhatsNew · Hecho por Noel<br>
+      © 2026 Noel. 
       Datos de películas y series proporcionados por TMDB. Esta aplicación usa la API de TMDB pero no está avalada ni certificada por TMDB.
     </div>
   </footer>
