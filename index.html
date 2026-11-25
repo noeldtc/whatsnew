@@ -1,75 +1,262 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>WhatsNew</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f8f8;
-        margin: 0;
-        padding: 0;
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsNew · Tu seguimiento de series y películas</title>
+  <meta name="description" content="WhatsNew: sigue series y películas, recibe avisos de estrenos, comparte lista en Duo y consulta tus estadísticas. Política de privacidad y condiciones de uso.">
+  <meta name="theme-color" content="#0f1222">
+  <style>
+    :root {
+      --bg: #f5f6fb;
+      --surface: #ffffff;
+      --text: #1c2033;
+      --muted: #5b6178;
+      --border: #e3e6f0;
+      --accent: #6c4cf5;
+      --accent-2: #e8478b;
+      --accent-soft: #eeeaff;
+      --radius: 16px;
+      --shadow: 0 6px 24px rgba(28, 32, 51, .07);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1222;
+        --surface: #181c33;
+        --text: #eceefb;
+        --muted: #a2a8c6;
+        --border: #272c4b;
+        --accent: #9b85ff;
+        --accent-2: #ff6fa8;
+        --accent-soft: #232850;
+        --shadow: 0 6px 24px rgba(0, 0, 0, .35);
       }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1 {
-        font-size: 40px;
-        color: #333;
-        text-align: center;
-        margin-top: 50px;
-      }
-      h2 {
-        font-size: 30px;
-        color: #333;
-        text-align: center;
-        margin-top: 50px;
-      }
-      p {
-        font-size: 20px;
-        color: #666;
-        line-height: 1.5;
-        text-align: justify;
-        margin: 20px 0;
-      }
-      a {
-        color: #333;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>WhatsNew</h1>
-      <h2>Política de Usuario y Privacidad de WhatsNew</h2>
-      <p>La presente Política de Usuario y Privacidad tiene como objetivo informarle sobre el uso que hacemos de los datos personales que se recopilan a través de la aplicación WhatsNew.</p>
-      <p>La aplicación WhatsNew es desarrollada por Noel y tiene como finalidad proporcionar información actualizada sobre noticias y eventos a sus usuarios. </p>
-      <h2>Información que recopilamos</h2>
-      <p>WhatsNew recopila información personal del usuario únicamente cuando éste la proporciona al momento de registrarse en la aplicación. Esta información incluye el email y los datos de región. </p>
-      <p>Además, la aplicación también puede recopilar información no personal del usuario, como la dirección IP, tipo de dispositivo, sistema operativo y la información de uso de la aplicación. </p>
-      <h2>Uso de la información </h2>
-      <p>La información personal del usuario es utilizada únicamente para personalizar la experiencia de uso de la aplicación y enviar notificaciones sobre las novedades de la aplicación. </p>
-      <p>La información no personal del usuario es utilizada para mejorar la calidad y seguridad de la aplicación, así como para llevar a cabo estudios estadísticos y análisis de mercado. </p>
-      <h2>Compartición de la información </h2>
-      <p>WhatsNew no comparte la información personal del usuario con terceros. </p>
-      <p>La información no personal del usuario puede ser compartida con proveedores de servicios externos para fines de análisis de datos y estadísticas. </p>
-      <h2>Seguridad de la información </h2>
-      <p>WhatsNew se compromete a mantener la seguridad de la información personal del usuario y ha implementado medidas técnicas y organizativas para evitar su pérdida, alteración o acceso no autorizado. </p>
-      <h2>Derechos del usuario </h2>
-      <p>El usuario tiene derecho a acceder, rectificar, cancelar u oponerse al tratamiento de su información personal. Para ejercer estos derechos, el usuario puede enviar un correo electrónico a la dirección d.noel.d.t.c@gmail.com . </p>
-      <h2>Cambios en la política de privacidad </h2>
-      <p>Nos reservamos el derecho de modificar esta Política de Usuario y Privacidad en cualquier momento. En caso de modificaciones significativas, se notificará al usuario a través de la aplicación o por correo electrónico. </p>
-      <h2>Contacto</h2>
-      <p>Si tiene alguna pregunta o inquietud acerca de esta Política de Usuario y Privacidad, por favor contáctenos a la dirección d.noel.d.t.c@gmail.com. </p>
-      <h3>Borrado de información</h3>
-      <p>Si desea borrar perfiles o usuarios por completo de la aplicación contacte al email: d.noel.d.t.c@gmail.com</p> 
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+    /* Navegación */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; gap: 16px; }
+    .brand { font-weight: 800; font-size: 1.15rem; color: var(--text); letter-spacing: -.02em; }
+    .brand span { color: var(--accent); }
+    nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+    nav ul a { color: var(--muted); font-weight: 500; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 72px 0 56px; }
+    .badge {
+      display: inline-block; padding: 5px 14px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: .8rem; font-weight: 600; margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(2.3rem, 6vw, 3.8rem); line-height: 1.1; margin: 0 0 16px; letter-spacing: -.03em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p { max-width: 620px; margin: 0 auto 28px; color: var(--muted); font-size: 1.12rem; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: .95rem;
+    }
+    .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
+    .btn.ghost { border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+
+    /* Secciones */
+    section { padding: 40px 0; }
+    h2 { font-size: 1.7rem; letter-spacing: -.02em; margin: 0 0 8px; }
+    .lead { color: var(--muted); margin: 0 0 28px; max-width: 680px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; box-shadow: var(--shadow);
+    }
+    .card .ico { font-size: 1.6rem; margin-bottom: 8px; }
+    .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    /* Privacidad */
+    .policy {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 8px 32px 24px; box-shadow: var(--shadow);
+    }
+    .policy h3 { margin: 28px 0 8px; font-size: 1.2rem; }
+    .policy p, .policy li { color: var(--muted); }
+    .policy p { margin: 8px 0; }
+    .policy ul { padding-left: 20px; margin: 8px 0; }
+    .policy li { margin: 4px 0; }
+    .policy strong { color: var(--text); }
+    .updated { color: var(--muted); font-size: .85rem; margin-top: 18px; }
+    .callout {
+      background: var(--accent-soft); border-radius: 12px; padding: 14px 18px; margin: 14px 0; color: var(--text);
+    }
+    .callout p, .callout li { color: var(--text); }
+    .table-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid var(--border); border-radius: 12px; }
+    table { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 560px; }
+    th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--accent-soft); font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+
+    footer { text-align: center; color: var(--muted); font-size: .88rem; padding: 40px 0 56px; }
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .policy { padding: 4px 20px 20px; }
+      .hero { padding: 48px 0 36px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="brand" href="#top">Whats<span>New</span></a>
+      <ul>
+        <li><a href="#funciones">Funciones</a></li>
+        <li><a href="#privacidad">Privacidad</a></li>
+        <li><a href="#derechos">Tus derechos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
     </div>
-  </body>
+  </nav>
+
+  <header class="hero wrap" id="top">
+    <span class="badge">App para Android y Android TV</span>
+    <h1>Nunca te pierdas <em>qué ver</em> a continuación</h1>
+    <p>WhatsNew sigue tus series y películas, te avisa de los estrenos, te recomienda títulos y te deja compartir lista con tu pareja o familia.</p>
+    <div class="btns">
+      <a class="btn primary" href="#funciones">Ver funciones</a>
+      <a class="btn ghost" href="#privacidad">Política de privacidad</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="funciones">
+      <h2>Qué puedes hacer</h2>
+      <p class="lead">Todo tu seguimiento de series y películas en un solo sitio, sincronizado entre tus dispositivos.</p>
+      <div class="grid">
+        <div class="card"><div class="ico">📺</div><h3>Seguimiento y siguiente episodio</h3><p>Marca lo que has visto, retoma donde lo dejaste y consulta los próximos episodios desde un widget en tu pantalla de inicio.</p></div>
+        <div class="card"><div class="ico">🔔</div><h3>Avisos de estrenos</h3><p>Recordatorios de episodios nuevos y calendario de estrenos de las series que sigues.</p></div>
+        <div class="card"><div class="ico">✨</div><h3>Recomendaciones</h3><p>Sugerencias personalizadas según tus gustos y las plataformas de streaming a las que estás suscrito.</p></div>
+        <div class="card"><div class="ico">👥</div><h3>Perfiles y modo Duo</h3><p>Varios perfiles por cuenta, con PIN opcional, y listas compartidas con tu pareja o familia.</p></div>
+        <div class="card"><div class="ico">📊</div><h3>Estadísticas y resumen del año</h3><p>Horas vistas, géneros favoritos, valoraciones y una tarjeta de tu año para compartir.</p></div>
+        <div class="card"><div class="ico">🔗</div><h3>Stremio y Trakt</h3><p>Importa tu historial desde Trakt o Stremio, abre títulos en Stremio y usa el addon privado de WhatsNew.</p></div>
+        <div class="card"><div class="ico">📡</div><h3>Dónde verlo</h3><p>Disponibilidad por plataforma y país, con acceso directo a tus apps de streaming.</p></div>
+        <div class="card"><div class="ico">📱</div><h3>Móvil y TV</h3><p>Interfaz adaptada a Android TV con mando, modo imagen en imagen y acceso rápido desde el inicio.</p></div>
+      </div>
+    </section>
+
+    <section id="privacidad">
+      <h2>Política de privacidad</h2>
+      <p class="lead">Explicamos de forma clara qué datos usa WhatsNew, para qué y cómo puedes controlarlos.</p>
+
+      <div class="policy">
+        <h3>1. Quién es el responsable</h3>
+        <p>WhatsNew (paquete <code>com.chaoss.whatsnew</code>) es desarrollada y mantenida por <strong>Noel</strong>, responsable del tratamiento de tus datos. Contacto: <a href="mailto:d.noel.d.t.c@gmail.com">d.noel.d.t.c@gmail.com</a>.</p>
+
+        <h3>2. Datos que tratamos</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Dato</th><th>Cuándo</th><th>Para qué</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Cuenta</strong>: correo electrónico y, si inicias con Google, identificador de cuenta</td><td>Al registrarte o iniciar sesión</td><td>Autenticarte y sincronizar tus datos entre dispositivos</td></tr>
+              <tr><td><strong>Perfiles</strong>: nombre, avatar, PIN opcional, región y preferencias</td><td>Al crear o editar perfiles</td><td>Personalizar la app y separar el contenido de cada persona</td></tr>
+              <tr><td><strong>Tu actividad</strong>: títulos seguidos y vistos, valoraciones, historial, lista pendiente, suscripciones de streaming</td><td>Al usar la app</td><td>Seguimiento, avisos de estrenos, recomendaciones y estadísticas</td></tr>
+              <tr><td><strong>Modo Duo</strong>: vínculo entre dos cuentas y la lista compartida</td><td>Si creas o te unes a un Duo</td><td>Compartir lista y recomendaciones conjuntas</td></tr>
+              <tr><td><strong>Integraciones</strong>: datos de Trakt (archivo .zip que eliges) y biblioteca de Stremio (solo lectura)</td><td>Solo si las activas</td><td>Importar tu historial. WhatsNew nunca modifica tu cuenta de Stremio</td></tr>
+              <tr><td><strong>Addon de Stremio</strong>: copia de tu lista y próximos episodios bajo un enlace secreto</td><td>Solo si lo activas</td><td>Mostrar tu lista dentro de Stremio. Quien tenga el enlace puede leerla; puedes desactivarlo cuando quieras</td></tr>
+              <tr><td><strong>Datos técnicos</strong>: tipo de dispositivo, versión de Android y de la app, informes de errores, rendimiento y uso anónimo</td><td>Según tu consentimiento (ver sección 4)</td><td>Corregir fallos y mejorar la app</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>No pedimos permisos de ubicación, contactos, cámara ni micrófono. Solo usamos <strong>Internet</strong>, <strong>notificaciones</strong> (para los avisos de estrenos) y vibración.</p>
+
+        <h3>3. Cómo usamos la información</h3>
+        <ul>
+          <li>Prestar el servicio: seguimiento, sincronización, calendario, recomendaciones y estadísticas.</li>
+          <li>Enviarte notificaciones sobre estrenos de las series que sigues, que puedes configurar o desactivar en Ajustes.</li>
+          <li>Detectar y corregir errores, y mejorar el rendimiento y la seguridad.</li>
+        </ul>
+        <div class="callout"><p><strong>No vendemos tus datos</strong> ni los usamos para publicidad. La app no muestra anuncios ni utiliza el identificador publicitario.</p></div>
+
+        <h3>4. Analítica y diagnóstico: tú decides</h3>
+        <p>La primera vez que abres la app te preguntamos si aceptas la analítica. Por defecto está <strong>desactivada</strong> hasta que aceptes, y puedes cambiarla en cualquier momento en <em>Ajustes → Enviar análisis de uso</em>.</p>
+        <ul>
+          <li><strong>Esenciales</strong> (siempre): autenticación y sincronización con Firebase, verificación de integridad de la app (App Check / Play Integrity) y configuración remota.</li>
+          <li><strong>Opcionales</strong>: estadísticas de uso anónimas (PostHog, servidores de la UE, y Firebase Analytics), informes de errores (Firebase Crashlytics) y medición de rendimiento (Firebase Performance). No incluyen nombres de perfil ni datos personales.</li>
+        </ul>
+
+        <h3>5. Con quién compartimos datos</h3>
+        <p>No compartimos tu información personal con terceros salvo los proveedores necesarios para el funcionamiento de la app, que actúan como encargados del tratamiento:</p>
+        <ul>
+          <li><strong>Google Firebase / Google Play Services</strong>: autenticación, base de datos en la nube, configuración remota, App Check, y (con tu consentimiento) Analytics, Crashlytics y Performance.</li>
+          <li><strong>PostHog</strong> (UE): estadísticas de uso anónimas, solo con consentimiento.</li>
+          <li><strong>The Movie Database (TMDB)</strong>: fuente de fichas, imágenes y disponibilidad por plataforma. Las consultas se hacen sin enviar tu correo ni tu nombre. Esta aplicación usa la API de TMDB pero no está avalada ni certificada por TMDB.</li>
+          <li><strong>Trakt y Stremio</strong>: únicamente si decides importar o vincular tus datos.</li>
+        </ul>
+        <p>Algunos proveedores pueden tratar datos fuera del Espacio Económico Europeo con las garantías previstas por el RGPD (cláusulas contractuales tipo).</p>
+
+        <h3>6. Seguridad y conservación</h3>
+        <ul>
+          <li>Comunicaciones cifradas (HTTPS) y reglas de acceso para que cada usuario solo lea sus propios datos.</li>
+          <li>Las claves de integraciones se guardan cifradas en el dispositivo.</li>
+          <li>Desactivamos las copias de seguridad automáticas de Android para que tus datos locales no salgan del dispositivo.</li>
+          <li>Conservamos tus datos mientras tengas la cuenta activa. Al eliminarla, se borran de forma definitiva.</li>
+        </ul>
+
+        <h3>7. Menores</h3>
+        <p>WhatsNew no está dirigida a menores de 14 años y no recopilamos conscientemente datos de ellos. Si crees que un menor nos ha facilitado datos, escríbenos y los eliminaremos.</p>
+
+        <h3 id="derechos">8. Tus derechos y cómo ejercerlos</h3>
+        <p>Puedes acceder, rectificar, suprimir, limitar, oponerte y solicitar la portabilidad de tus datos, y reclamar ante la autoridad de control (en España, la <a href="https://www.aepd.es" rel="noopener">AEPD</a>).</p>
+        <ul>
+          <li><strong>Exportar tus datos</strong>: <em>Ajustes → Exportar datos de usuario</em> genera una copia de tus preferencias y lista de seguimiento.</li>
+          <li><strong>Eliminar tu cuenta y todos tus datos</strong>: <em>Ajustes → Eliminar cuenta</em>. Se borran tu cuenta, perfiles, listas e historial en la nube y los datos locales del dispositivo. Es irreversible.</li>
+          <li><strong>Sin acceso a la app</strong>: escribe a <a href="mailto:d.noel.d.t.c@gmail.com?subject=WhatsNew%20-%20Eliminar%20datos">d.noel.d.t.c@gmail.com</a> desde el correo de tu cuenta y la eliminaremos.</li>
+          <li><strong>Retirar el consentimiento</strong> de analítica y diagnóstico en <em>Ajustes</em>, cuando quieras.</li>
+        </ul>
+
+        <h3>9. Cambios en esta política</h3>
+        <p>Podemos actualizar esta política. Si el cambio es relevante, te lo comunicaremos en la app o por correo electrónico. La fecha de la última revisión aparece abajo.</p>
+        <p class="updated">Última actualización: 25 de noviembre de 2026</p>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <p class="lead">¿Dudas sobre privacidad, sugerencias o quieres borrar tu cuenta?</p>
+      <div class="btns" style="justify-content:flex-start">
+        <a class="btn primary" href="mailto:d.noel.d.t.c@gmail.com?subject=WhatsNew">Escríbenos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © 2026 WhatsNew · Hecho por Noel<br>
+      Datos de películas y series proporcionados por TMDB. Esta aplicación usa la API de TMDB pero no está avalada ni certificada por TMDB.
+    </div>
+  </footer>
+</body>
 </html>
-  
